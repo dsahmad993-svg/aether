@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether - Capability-Based Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">✨ Aether</div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" onclick="switchView('dashboard')">📊 Dashboard</button>
+                <button class="nav-btn" onclick="switchView('habits')">🎯 Habits</button>
+                <button class="nav-btn" onclick="switchView('skill-tree')">🌳 Skill Tree</button>
+                <button class="nav-btn" onclick="switchView('forest')">🌲 Habit Forest</button>
+                <button class="nav-btn" onclick="switchView('coaching')">🤖 Sage Coach</button>
+                <button class="nav-btn" onclick="switchView('squads')">👥 Squads</button>
+                <button class="nav-btn" onclick="switchView('analytics')">📈 Analytics</button>
+                <button class="nav-btn" onclick="switchView('settings')">⚙️ Settings</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="dashboard" class="view active">
+                <h1>🎯 Your Momentum</h1>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Momentum Score</div>
+                        <div class="stat-value" id="momentumScore">0%</div>
+                        <div class="momentum-bar"><div class="momentum-fill" style="width: 0%"></div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Capabilities Gained</div>
+                        <div class="stat-value" id="capabilityCount">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Energy Level</div>
+                        <div class="energy-selector">
+                            <input type="range" min="1" max="10" value="5" id="energyLevel" onchange="updateEnergy(this.value)">
+                            <span id="energyDisplay">5/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="smart-button-section">
+                    <h2>🚀 Smart Action</h2>
+                    <div class="smart-button" id="smartButton" onclick="executeSmartAction()">
+                        Start Your Day
+                    </div>
+                </div>
+
+                <div class="today-habits">
+                    <h2>📋 Today's Habits</h2>
+                    <div id="todayHabitsList" class="habits-list"></div>
+                </div>
+
+                <div class="coaching-suggestion">
+                    <h3>💡 Sage's Recommendation</h3>
+                    <div id="coachingSuggestion" class="suggestion-box"></div>
+                </div>
+            </section>
+
+            <section id="habits" class="view">
+                <h1>🎯 Your Habits</h1>
+                <button class="btn-primary" onclick="showHabitModal()">+ Create New Habit</button>
+                <div id="habitsList" class="habits-list"></div>
+            </section>
+
+            <section id="skill-tree" class="view">
+                <h1>🌳 Skill Tree</h1>
+                <div class="skill-tree-container" id="skillTree"></div>
+            </section>
+
+            <section id="forest" class="view">
+                <h1>🌲 Your Habit Forest</h1>
+                <div class="forest-canvas" id="forestCanvas"></div>
+            </section>
+
+            <section id="coaching" class="view">
+                <h1>🤖 Sage Coach</h1>
+                <div id="coachingPanel" class="coaching-panel"></div>
+            </section>
+
+            <section id="squads" class="view">
+                <h1>👥 Your Squads</h1>
+                <button class="btn-primary" onclick="showSquadModal()">+ Create Squad</button>
+                <div id="squadsList" class="squads-list"></div>
+            </section>
+
+            <section id="analytics" class="view">
+                <h1>📈 Analytics</h1>
+                <div class="analytics-grid">
+                    <div class="chart-container">
+                        <h3>Consistency Heatmap</h3>
+                        <div id="heatmap" class="heatmap"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="settings" class="view">
+                <h1>⚙️ Settings</h1>
+                <div class="settings-section">
+                    <h3>Data Management</h3>
+                    <button class="btn-secondary" onclick="exportData()">📥 Export My Data</button>
+                    <button class="btn-secondary" onclick="clearAllData()">🗑️ Clear All Data</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="habitModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('habitModal')">&times;</span>
+            <h2>Create New Habit</h2>
+            <form onsubmit="createHabit(event)">
+                <input type="text" id="habitNameInput" placeholder="Habit Name" required>
+                <select id="habitTypeInput">
+                    <option value="fitness">Fitness</option>
+                    <option value="meditation">Meditation</option>
+                    <option value="learning">Learning</option>
+                    <option value="nutrition">Nutrition</option>
+                </select>
+                <input type="text" id="easyInput" placeholder="Easy version">
+                <input type="text" id="normalInput" placeholder="Normal version">
+                <input type="text" id="hardInput" placeholder="Hard version">
+                <button type="submit" class="btn-primary">Create Habit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
